@@ -25,8 +25,8 @@ const mapStateToProps = (state, ownProps) => {
   const { txParams: { gas: gasLimit, gasPrice } = {} } = primaryTransaction
   const selectedAccountBalance = accounts[getSelectedAddress(state)].balance
   const selectRpcInfo = frequentRpcListDetail.find(rpcInfo => rpcInfo.rpcUrl === provider.rpcTarget)
-  const { rpcPrefs } = selectRpcInfo || {}
 
+  const { rpcPrefs } = selectRpcInfo || {}
   const hasEnoughCancelGas = primaryTransaction.txParams && isBalanceSufficient({
     amount: '0x0',
     gasTotal: getHexGasTotal({

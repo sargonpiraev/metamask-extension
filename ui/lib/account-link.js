@@ -24,6 +24,9 @@ module.exports = function (address, network, rpcPrefs) {
     case 5: // goerli test net
       link = `https://goerli.etherscan.io/address/${address}`
       break
+    case 68: // goerli test net
+      link = `https://explorer-stage.chronobank.io/address/${address}`
+      break
     default:
       link = ''
       break

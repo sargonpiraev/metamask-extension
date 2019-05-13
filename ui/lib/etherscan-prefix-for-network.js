@@ -17,6 +17,9 @@ module.exports = function (network) {
     case 5: // goerli test net
       prefix = 'goerli.'
       break
+    case 68: // goerli test net
+      prefix = 'laborx.'
+      break
     default:
       prefix = ''
   }

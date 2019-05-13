@@ -53,6 +53,10 @@ function createNetworkAndChainIdMiddleware ({ network }) {
       netId = '5'
       chainId = '0x05'
       break
+    case 'laborx':
+      netId = '68'
+      chainId = '0x88'
+      break
     default:
       throw new Error(`createInfuraClient - unknown network "${network}"`)
   }

@@ -43,6 +43,15 @@ const defaultNetworksData = [
     rpcUrl: 'http://localhost:8545/',
     blockExplorerUrl: 'https://etherscan.io',
   },
+  {
+    labelKey: 'laborx',
+    iconColor: '#29B6AF',
+    providerType: 'rpc',
+    rpcUrl: 'https://sidechain-nodes-api-testnet.chronobank.io',
+    chainId: '68',
+    ticker: 'LHT',
+    blockExplorerUrl: 'https://explorer-stage.chronobank.io',
+  },
 ]
 
 export {

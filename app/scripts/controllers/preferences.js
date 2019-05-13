@@ -28,7 +28,17 @@ class PreferencesController {
    */
   constructor (opts = {}) {
     const initState = extend({
-      frequentRpcListDetail: [],
+      frequentRpcListDetail: [
+        {
+          rpcUrl: 'https://sidechain-nodes-api-testnet.chronobank.io',
+          chainId: 68,
+          ticker: 'LHT',
+          nickname: 'LaborX',
+          rpcPrefs: {
+            blockExplorerUrl: 'https://explorer-stage.chronobank.io',
+          },
+        },
+      ],
       currentAccountTab: 'history',
       accountTokens: {},
       assetImages: {},

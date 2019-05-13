@@ -45,9 +45,7 @@ describe('Network Dropdown', () => {
         provider: {
           'type': 'test',
         },
-        frequentRpcListDetail: [
-          { rpcUrl: 'http://localhost:7545' },
-        ],
+        frequentRpcListDetail: [],
       },
       appState: {
         'networkDropdownOpen': true,

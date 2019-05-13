@@ -287,6 +287,8 @@ class Routes extends Component {
       name = this.context.t('connectingToLocalhost')
     } else if (providerName === 'goerli') {
       name = this.context.t('connectingToGoerli')
+    } else if (providerName === 'laborx') {
+      name = this.context.t('connectingToLaborx')
     } else {
       name = this.context.t('connectingTo', [providerId])
     }
@@ -312,6 +314,8 @@ class Routes extends Component {
       name = this.context.t('localhost')
     } else if (providerName === 'goerli') {
       name = this.context.t('goerli')
+    } else if (providerName === 'laborx') {
+      name = this.context.t('laborx')
     } else {
       name = this.context.t('unknownNetwork')
     }

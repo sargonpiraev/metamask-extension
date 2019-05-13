@@ -705,7 +705,8 @@
       "ropsten": "ok",
       "kovan": "ok",
       "rinkeby": "ok",
-      "goerli": "ok"
+      "goerli": "ok",
+      "laborx": "ok",
     },
     "shapeShiftTxList": [],
     "lostAccounts": []

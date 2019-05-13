@@ -30,6 +30,8 @@ function getBuyEthUrl ({ network, amount, address, service }) {
       return 'https://github.com/kovan-testnet/faucet'
     case 'goerli-faucet':
       return 'https://goerli-faucet.slock.it/'
+    case 'laborx-faucet':
+      return 'https://faucet-dev.chronobank.io'
   }
   throw new Error(`Unknown cryptocurrency exchange or faucet: "${service}"`)
 }

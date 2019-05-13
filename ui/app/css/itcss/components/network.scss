@@ -33,6 +33,10 @@
   &.goerli-test-network .menu-icon-circle div {
     background-color: rgba(48, 153, 242, .7) !important;
   }
+
+  &.laborx-test-network .menu-icon-circle div {
+    background-color: rgba(255, 0, 0, 0.7) !important;
+  }
 }
 
 .dropdown-menu-item {

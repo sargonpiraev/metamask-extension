@@ -133,7 +133,7 @@
     "description": "The description of the application"
   },
   "appName": {
-    "message": "MetaMask",
+    "message": "LaborX MetaMask",
     "description": "The name of the application"
   },
   "approve": {
@@ -1268,6 +1268,9 @@
   },
   "goerli": {
     "message": "Goerli Test Network"
+  },
+  "laborx": {
+    "message": "LaborX"
   },
   "rpc": {
     "message": "Custom RPC"
