@@ -66,6 +66,7 @@ ConfirmPageContainerSummary.propTypes = {
   identiconAddress: PropTypes.string,
   nonce: PropTypes.string,
   assetImage: PropTypes.string,
+  txDataRaw: PropTypes.string,
 }
 
 export default ConfirmPageContainerSummary

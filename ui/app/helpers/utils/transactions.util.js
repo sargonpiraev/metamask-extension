@@ -1,3 +1,4 @@
+const laborxScAbiConfig = require('@laborx/sc-abi')
 import ethUtil from 'ethereumjs-util'
 import MethodRegistry from 'eth-method-registry'
 import abi from 'human-standard-token-abi'
@@ -27,6 +28,7 @@ import log from 'loglevel'
 import { addCurrencies } from './conversion-util'
 
 abiDecoder.addABI(abi)
+// abiDecoder.addABI(laborxScAbiConfig.JobController.abi)
 
 export function getTokenData (data = '') {
   return abiDecoder.decodeMethod(data)

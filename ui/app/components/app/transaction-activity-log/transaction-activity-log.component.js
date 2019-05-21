@@ -30,9 +30,6 @@ export default class TransactionActivityLog extends PureComponent {
     const { primaryTransaction, rpcPrefs } = this.props
     const { metamaskNetworkId } = primaryTransaction
 
-    debugger
-
-
     // const url = txLink(hash, metamaskNetworkId, { blockchainUrl:  })
 
     // const prefix = prefixForNetwork(metamaskNetworkId)

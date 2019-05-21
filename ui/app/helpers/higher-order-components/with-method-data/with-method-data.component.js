@@ -26,14 +26,16 @@ export default function withMethodData (WrappedComponent) {
     }
 
     async fetchMethodData () {
-      const { transaction, knownMethodData, addKnownMethodData } = this.props
+      const { transaction, knownMethodData, addKnownMethodData, laborxMethodData } = this.props
       const { txParams: { data = '' } = {} } = transaction
 
       if (data) {
         try {
           let methodData
           const fourBytePrefix = getFourBytePrefix(data)
-          if (fourBytePrefix in knownMethodData) {
+          if (fourBytePrefix in laborxMethodData) {
+            methodData = laborxMethodData[fourBytePrefix]
+          } else if (fourBytePrefix in knownMethodData) {
             methodData = knownMethodData[fourBytePrefix]
           } else {
             methodData = await getMethodData(data)

@@ -1,3 +1,5 @@
+const ethereumjsAbi = require('ethereumjs-abi')
+const laborxScAbiConfig = require('@laborx/sc-abi')
 const extend = require('xtend')
 const actions = require('../../store/actions')
 const { getEnvironmentType } = require('../../../../app/scripts/lib/util')
@@ -5,6 +7,16 @@ const { ENVIRONMENT_TYPE_POPUP } = require('../../../../app/scripts/lib/enums')
 const { OLD_UI_NETWORK_TYPE } = require('../../../../app/scripts/controllers/network/enums')
 
 module.exports = reduceMetamask
+
+// const postJobSignature = ethereumjsAbi.methodID()
+
+const jobControllerMethodData = laborxScAbiConfig.JobController.abi
+  .filter((abi) => abi.type === 'function')
+  .map((abi) => ({
+    signature: '0x' + ethereumjsAbi.methodID(abi.name, abi.inputs.map((abi) => abi.type)).toString('hex'),
+    abi,
+  }))
+  .reduce((result, { signature, abi }) => ({ ...result, [signature]: { name: abi.name, abi } }), {})
 
 function reduceMetamask (state, action) {
   let newState
@@ -54,6 +66,9 @@ function reduceMetamask (state, action) {
     firstTimeFlowType: null,
     completedOnboarding: false,
     knownMethodData: {},
+    laborxMethodData: {
+      ...jobControllerMethodData,
+    },
     participateInMetaMetrics: null,
     metaMetricsSendCount: 0,
   }, state.metamask)

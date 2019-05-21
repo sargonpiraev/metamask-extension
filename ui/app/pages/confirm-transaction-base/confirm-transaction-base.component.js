@@ -14,6 +14,7 @@ import { CONFIRMED_STATUS, DROPPED_STATUS } from '../../helpers/constants/transa
 import UserPreferencedCurrencyDisplay from '../../components/app/user-preferenced-currency-display'
 import { PRIMARY, SECONDARY } from '../../helpers/constants/common'
 import AdvancedGasInputs from '../../components/app/gas-customization/advanced-gas-inputs'
+import PostJobTxView from '../../../../src/view/PostJobTxView'
 
 export default class ConfirmTransactionBase extends Component {
   static contextTypes = {
@@ -93,6 +94,7 @@ export default class ConfirmTransactionBase extends Component {
     advancedInlineGasShown: PropTypes.bool,
     insufficientBalance: PropTypes.bool,
     hideFiatConversion: PropTypes.bool,
+    txDataRaw: PropTypes.string,
   }
 
   state = {
@@ -253,20 +255,55 @@ export default class ConfirmTransactionBase extends Component {
           data,
         } = {},
       } = {},
-      methodData: {
-        name,
-        params,
-      } = {},
+      methodData = {},
       hideData,
       dataComponent,
     } = this.props
+
+    const { name, params } = methodData
 
     if (hideData) {
       return null
     }
 
-    return dataComponent || (
+    const laborxMethodView = {
+      postJob: PostJobTxView,
+    }
+
+    const LaborxMethodViewComponent = laborxMethodView[name]
+
+    return dataComponent || LaborxMethodViewComponent ? <LaborxMethodViewComponent methodData={methodData} /> : (
       <div className="confirm-page-container-content__data">
+
+        <div className="confirm-page-container-content__data-box-label">
+          {t('youAreTryingTo')}
+          <span className="confirm-page-container-content__function-type">
+            { t(name) || t('notFound') }
+          </span>
+          &nbsp;
+          {t('withParams')}:
+        </div>
+        {
+          params && (
+            <div className="request-signature__rows" style={{ overflowY: 'auto' }}>
+              {
+                params.map(({ type, name, value }) => {
+                  if (type === 'bool') value = value.toString()
+                  return (
+                    <div className="request-signature__row" key={name}>
+                      <div className="request-signature__row-title">{t(name)}</div>
+                      <div className="request-signature__row-value">{value}</div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+          )
+        }
+
+        <br/>
+        <br/>
+
         <div className="confirm-page-container-content__data-box-label">
           {`${t('functionType')}:`}
           <span className="confirm-page-container-content__function-type">
@@ -285,6 +322,7 @@ export default class ConfirmTransactionBase extends Component {
             </div>
           )
         }
+
         <div className="confirm-page-container-content__data-box-label">
           {`${t('hexData')}: ${ethUtil.toBuffer(data).length} bytes`}
         </div>
@@ -533,6 +571,7 @@ export default class ConfirmTransactionBase extends Component {
       assetImage,
       warning,
       unapprovedTxCount,
+      txDataRaw,
     } = this.props
     const { submitting, submitError } = this.state
 
@@ -580,6 +619,7 @@ export default class ConfirmTransactionBase extends Component {
         onCancelAll={() => this.handleCancelAll()}
         onCancel={() => this.handleCancel()}
         onSubmit={() => this.handleSubmit()}
+        txDataRaw={txDataRaw}
       />
     )
   }

@@ -1,3 +1,6 @@
+import ipfsApi from './../../../../src/api/ipfs'
+import bytes32ToIpfsHash from './../../../../src/util/bytes32ToIpfsHash'
+import abiDecoder from 'abi-decoder'
 import log from 'loglevel'
 import {
   conversionRateSelector,
@@ -26,6 +29,18 @@ import {
 import { getSymbolAndDecimals } from '../../helpers/utils/token-util'
 import { conversionUtil } from '../../helpers/utils/conversion-util'
 import { addHexPrefix } from 'ethereumjs-util'
+
+import * as laborxScAbiConfig from '@laborx/sc-abi'
+import ipfs from '../../../../src/api/ipfs'
+
+
+const jobControllerAbi = [
+  ...laborxScAbiConfig.JobWorkInitiationControllerLib.abi,
+  ...laborxScAbiConfig.JobWorkProcessControllerLib.abi,
+  ...laborxScAbiConfig.JobWorkAcceptanceControllerLib.abi,
+]
+
+abiDecoder.addABI(jobControllerAbi)
 
 // Actions
 const createActionType = action => `metamask/confirm-transaction/${action}`
@@ -352,6 +367,7 @@ export function setTransactionToConfirm (transactionId) {
     const state = getState()
     const unconfirmedTransactionsHash = unconfirmedTransactionsHashSelector(state)
     const transaction = unconfirmedTransactionsHash[transactionId]
+    const laborxMethodData = state.metamask.laborxMethodData
 
     if (!transaction) {
       console.error(`Transaction with id ${transactionId} not found`)
@@ -371,7 +387,28 @@ export function setTransactionToConfirm (transactionId) {
         const { data, to: tokenAddress } = txParams
 
         dispatch(setFetchingData(true))
-        const methodData = await getMethodData(data)
+
+        const methodSignature = data.slice(0, 10)
+
+        var methodData;
+
+        const laborxMethodIpfs = {
+          postJob: '_detailsIPFSHash',
+        }
+
+        if (laborxMethodData[methodSignature]) {
+          methodData = abiDecoder.decodeMethod(data)
+          if (laborxMethodIpfs[methodData.name]) {
+            const ipfsHashBytes = methodData.params
+              .find(({ name }) => name === laborxMethodIpfs[methodData.name])
+              .value
+            const ipfsHash = bytes32ToIpfsHash(ipfsHashBytes)
+            methodData.ipfs = await ipfsApi.getJSON(ipfsHash)
+          }
+        } else {
+          methodData = await getMethodData(data)
+        }
+
         dispatch(updateMethodData(methodData))
 
         try {

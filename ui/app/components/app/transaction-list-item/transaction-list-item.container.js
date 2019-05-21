@@ -18,7 +18,7 @@ import { getIsMainnet, preferencesSelector, getSelectedAddress, conversionRateSe
 import { isBalanceSufficient } from '../../../pages/send/send.utils'
 
 const mapStateToProps = (state, ownProps) => {
-  const { metamask: { knownMethodData, accounts, provider, frequentRpcListDetail } } = state
+  const { metamask: { knownMethodData, laborxMethodData, accounts, provider, frequentRpcListDetail } } = state
   const { showFiatInTestnets } = preferencesSelector(state)
   const isMainnet = getIsMainnet(state)
   const { transactionGroup: { primaryTransaction } = {} } = ownProps
@@ -39,6 +39,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     knownMethodData,
+    laborxMethodData,
     showFiat: (isMainnet || !!showFiatInTestnets),
     selectedAccountBalance,
     hasEnoughCancelGas,

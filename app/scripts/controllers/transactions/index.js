@@ -1,3 +1,4 @@
+const laborxScAbiConfig = require('@laborx/sc-abi')
 const EventEmitter = require('safe-event-emitter')
 const ObservableStore = require('obs-store')
 const ethUtil = require('ethereumjs-util')
@@ -6,6 +7,7 @@ const EthQuery = require('ethjs-query')
 const abi = require('human-standard-token-abi')
 const abiDecoder = require('abi-decoder')
 abiDecoder.addABI(abi)
+// abiDecoder.addABI(laborxScAbiConfig.JobController.abi)
 const {
   TOKEN_METHOD_APPROVE,
   TOKEN_METHOD_TRANSFER,
