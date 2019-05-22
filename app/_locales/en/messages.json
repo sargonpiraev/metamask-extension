@@ -1813,38 +1813,5 @@
   },
   "postJob": {
     "message": "Post a Job"
-  },
-  "_boardId": {
-    "message": "Job Board Id"
-  },
-  "_workflow": {
-    "message": "Job Workflow Type"
-  },
-  "_workstepConfirmationRequired": {
-    "message": "Does Job Need Employer's Confirmation to Start"
-  },
-  "_area": {
-    "message": "Job Area Bit Mask"
-  },
-  "_category": {
-    "message": "Job Category Bit Mask"
-  },
-  "_skills": {
-    "message": "Job Skills Bit Mask"
-  },
-  "_defaultPay": {
-    "message": "Job Default Payment"
-  },
-  "_detailsIPFSHash": {
-    "message": "Job Details Ipfs Hash"
-  },
-  "_deadline": {
-    "message": "Job Deadline"
-  },
-  "TIMES_BASED": {
-    "message": "Times Based"
-  },
-  "FIXED_PRICE": {
-    "message": "Fixed Price"
   }
 }
