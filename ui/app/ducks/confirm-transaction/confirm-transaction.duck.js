@@ -1,5 +1,3 @@
-import ipfsApi from './../../../../src/api/ipfs'
-import bytes32ToIpfsHash from './../../../../src/util/bytes32ToIpfsHash'
 import abiDecoder from 'abi-decoder'
 import log from 'loglevel'
 import {
@@ -31,8 +29,6 @@ import { conversionUtil } from '../../helpers/utils/conversion-util'
 import { addHexPrefix } from 'ethereumjs-util'
 
 import * as laborxScAbiConfig from '@laborx/sc-abi'
-import ipfs from '../../../../src/api/ipfs'
-
 
 const jobControllerAbi = [
   ...laborxScAbiConfig.JobWorkInitiationControllerLib.abi,
@@ -390,24 +386,9 @@ export function setTransactionToConfirm (transactionId) {
 
         const methodSignature = data.slice(0, 10)
 
-        var methodData;
-
-        const laborxMethodIpfs = {
-          postJob: '_detailsIPFSHash',
-        }
-
-        if (laborxMethodData[methodSignature]) {
-          methodData = abiDecoder.decodeMethod(data)
-          if (laborxMethodIpfs[methodData.name]) {
-            const ipfsHashBytes = methodData.params
-              .find(({ name }) => name === laborxMethodIpfs[methodData.name])
-              .value
-            const ipfsHash = bytes32ToIpfsHash(ipfsHashBytes)
-            methodData.ipfs = await ipfsApi.getJSON(ipfsHash)
-          }
-        } else {
-          methodData = await getMethodData(data)
-        }
+        const methodData = laborxMethodData[methodSignature]
+          ? abiDecoder.decodeMethod(data)
+          : await getMethodData(data)
 
         dispatch(updateMethodData(methodData))
 

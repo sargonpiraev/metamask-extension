@@ -59,7 +59,6 @@ export default class ConfirmPageContainer extends Component {
     onCancel: PropTypes.func,
     onSubmit: PropTypes.func,
     disabled: PropTypes.bool,
-    txDataRaw: PropTypes.string,
   }
 
   render () {

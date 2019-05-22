@@ -8,13 +8,11 @@ const { OLD_UI_NETWORK_TYPE } = require('../../../../app/scripts/controllers/net
 
 module.exports = reduceMetamask
 
-// const postJobSignature = ethereumjsAbi.methodID()
-
 const jobControllerMethodData = laborxScAbiConfig.JobController.abi
   .filter((abi) => abi.type === 'function')
   .map((abi) => ({
-    signature: '0x' + ethereumjsAbi.methodID(abi.name, abi.inputs.map((abi) => abi.type)).toString('hex'),
-    abi,
+      signature: '0x' + ethereumjsAbi.methodID(abi.name, abi.inputs.map((abi) => abi.type)).toString('hex'),
+      abi,
   }))
   .reduce((result, { signature, abi }) => ({ ...result, [signature]: { name: abi.name, abi } }), {})
 

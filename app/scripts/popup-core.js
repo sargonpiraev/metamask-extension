@@ -1,4 +1,3 @@
-const abiDecoder = require('abi-decoder')
 const {EventEmitter} = require('events')
 const async = require('async')
 const Dnode = require('dnode')
@@ -7,8 +6,6 @@ const EthQuery = require('eth-query')
 const launchMetamaskUi = require('../../ui')
 const StreamProvider = require('web3-stream-provider')
 const {setupMultiplex} = require('./lib/stream-utils.js')
-const laborxScAbiConfig = require('@laborx/sc-abi')
-// const laborxScAddressesConfig = require('@laborx/sc-addresses')
 
 module.exports = initializePopup
 
@@ -54,9 +51,6 @@ function setupWeb3Connection (connectionStream) {
   global.ethereumProvider = providerStream
   global.ethQuery = new EthQuery(providerStream)
   global.eth = new Eth(providerStream)
-  // // global.JobController = global.eth.contract(laborxScAbiConfig.JobController.abi).at(laborxScAddressesConfig[68].JobController)
-  // abiDecoder.addABI(laborxScAbiConfig.JobController.abi)
-  // // global.abiDecoder = abiDecoder
 }
 
 /**

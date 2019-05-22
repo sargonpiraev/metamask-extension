@@ -172,7 +172,6 @@ export default class TransactionListItem extends PureComponent {
 
     return (
       <div className="transaction-list-item">
-        {/*{JSON.stringify(this.props.rpcPrefs)}*/}
         <div
           className="transaction-list-item__grid"
           onClick={this.handleClick}

@@ -48,7 +48,6 @@ const mapStateToProps = (state, props) => {
     tokenProps,
     nonce,
   } = confirmTransaction
-
   const { txParams = {}, lastGasPrice, id: transactionId } = txData
   const {
     from: fromAddress,
@@ -56,7 +55,6 @@ const mapStateToProps = (state, props) => {
     gasPrice,
     gas: gasLimit,
     value: amount,
-    data: txDataRaw,
   } = txParams
   const accounts = getMetaMaskAccounts(state)
   const {
@@ -143,7 +141,6 @@ const mapStateToProps = (state, props) => {
     hideSubtitle: (!isMainnet && !showFiatInTestnets),
     hideFiatConversion: (!isMainnet && !showFiatInTestnets),
     metaMetricsSendCount,
-    txDataRaw,
   }
 }
 

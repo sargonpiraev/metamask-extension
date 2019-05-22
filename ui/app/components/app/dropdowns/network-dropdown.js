@@ -205,99 +205,76 @@ NetworkDropdown.prototype.render = function () {
       ]
     ),
 
-    // h(
-    //   DropdownMenuItem,
-    //   {
-    //     key: 'goerli',
-    //     closeMenu: () => this.props.hideNetworkDropdown(),
-    //     onClick: () => this.handleClick('goerli'),
-    //     style: dropdownMenuItemStyle,
-    //   },
-    //   [
-    //     providerType === 'goerli' ? h('i.fa.fa-check') : h('.network-check__transparent', '✓'),
-    //     h(NetworkDropdownIcon, {
-    //       backgroundColor: '#3099f2', // $dodger-blue
-    //       isSelected: providerType === 'goerli',
-    //     }),
-    //     h('span.network-name-item', {
-    //       style: {
-    //         color: providerType === 'goerli' ? '#ffffff' : '#9b9b9b',
-    //       },
-    //     }, this.context.t('goerli')),
-    //   ]
-    // ),
+    h(
+      DropdownMenuItem,
+      {
+        key: 'goerli',
+        closeMenu: () => this.props.hideNetworkDropdown(),
+        onClick: () => this.handleClick('goerli'),
+        style: dropdownMenuItemStyle,
+      },
+      [
+        providerType === 'goerli' ? h('i.fa.fa-check') : h('.network-check__transparent', '✓'),
+        h(NetworkDropdownIcon, {
+          backgroundColor: '#3099f2', // $dodger-blue
+          isSelected: providerType === 'goerli',
+        }),
+        h('span.network-name-item', {
+          style: {
+            color: providerType === 'goerli' ? '#ffffff' : '#9b9b9b',
+          },
+        }, this.context.t('goerli')),
+      ]
+    ),
 
-    // h(
-    //   DropdownMenuItem,
-    //   {
-    //     key: 'laborx',
-    //     closeMenu: () => this.props.hideNetworkDropdown(),
-    //     onClick: () => this.handleClick('laborx'),
-    //     style: dropdownMenuItemStyle,
-    //   },
-    //   [
-    //     providerType === 'laborx' ? h('i.fa.fa-check') : h('.network-check__transparent', '✓'),
-    //     h(NetworkDropdownIcon, {
-    //       backgroundColor: '#3099f2', // $dodger-blue
-    //       isSelected: providerType === 'laborx',
-    //     }),
-    //     h('span.network-name-item', {
-    //       style: {
-    //         color: providerType === 'laborx' ? '#ffffff' : '#9b9b9b',
-    //       },
-    //     }, this.context.t('laborx')),
-    //   ]
-    // ),
+    h(
+      DropdownMenuItem,
+      {
+        key: 'default',
+        closeMenu: () => this.props.hideNetworkDropdown(),
+        onClick: () => this.handleClick('localhost'),
+        style: dropdownMenuItemStyle,
+      },
+      [
+        providerType === 'localhost' ? h('i.fa.fa-check') : h('.network-check__transparent', '✓'),
+        h(NetworkDropdownIcon, {
+          isSelected: providerType === 'localhost',
+          innerBorder: '1px solid #9b9b9b',
+        }),
+        h('span.network-name-item', {
+          style: {
+            color: providerType === 'localhost' ? '#ffffff' : '#9b9b9b',
+          },
+        }, this.context.t('localhost')),
+      ]
+    ),
 
-    // h(
-    //   DropdownMenuItem,
-    //   {
-    //     key: 'default',
-    //     closeMenu: () => this.props.hideNetworkDropdown(),
-    //     onClick: () => this.handleClick('localhost'),
-    //     style: dropdownMenuItemStyle,
-    //   },
-    //   [
-    //     providerType === 'localhost' ? h('i.fa.fa-check') : h('.network-check__transparent', '✓'),
-    //     h(NetworkDropdownIcon, {
-    //       isSelected: providerType === 'localhost',
-    //       innerBorder: '1px solid #9b9b9b',
-    //     }),
-    //     h('span.network-name-item', {
-    //       style: {
-    //         color: providerType === 'localhost' ? '#ffffff' : '#9b9b9b',
-    //       },
-    //     }, this.context.t('localhost')),
-    //   ]
-    // ),
-
-    // this.renderCustomOption(props.provider),
-
+    this.renderCustomOption(props.provider),
     this.renderCommonRpc(rpcListDetail, props.provider),
 
-    // h(
-    //   DropdownMenuItem,
-    //   {
-    //     closeMenu: () => this.props.hideNetworkDropdown(),
-    //     onClick: () => {
-    //       setNetworksTabAddMode(true)
-    //       this.props.history.push(NETWORKS_ROUTE)
-    //     },
-    //     style: dropdownMenuItemStyle,
-    //   },
-    //   [
-    //     activeNetwork === 'custom' ? h('i.fa.fa-check') : h('.network-check__transparent', '✓'),
-    //     h(NetworkDropdownIcon, {
-    //       isSelected: activeNetwork === 'custom',
-    //       innerBorder: '1px solid #9b9b9b',
-    //     }),
-    //     h('span.network-name-item', {
-    //       style: {
-    //         color: activeNetwork === 'custom' ? '#ffffff' : '#9b9b9b',
-    //       },
-    //     }, this.context.t('customRPC')),
-    //   ]
-    // ),
+    h(
+      DropdownMenuItem,
+      {
+        closeMenu: () => this.props.hideNetworkDropdown(),
+        onClick: () => {
+          setNetworksTabAddMode(true)
+          this.props.history.push(NETWORKS_ROUTE)
+        },
+        style: dropdownMenuItemStyle,
+      },
+      [
+        activeNetwork === 'custom' ? h('i.fa.fa-check') : h('.network-check__transparent', '✓'),
+        h(NetworkDropdownIcon, {
+          isSelected: activeNetwork === 'custom',
+          innerBorder: '1px solid #9b9b9b',
+        }),
+        h('span.network-name-item', {
+          style: {
+            color: activeNetwork === 'custom' ? '#ffffff' : '#9b9b9b',
+          },
+        }, this.context.t('customRPC')),
+      ]
+    ),
 
   ])
 }
