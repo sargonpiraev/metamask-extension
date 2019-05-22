@@ -222,6 +222,8 @@ class TransactionStateManager extends EventEmitter {
       const value = txParams[key]
       // validate types
       switch (key) {
+        case 'metainfo':
+          break
         case 'chainId':
           if (typeof value !== 'number' && typeof value !== 'string') throw new Error(`${key} in txParams is not a Number or hex string. got: (${value})`)
           break

@@ -253,6 +253,10 @@ export default class ConfirmTransactionBase extends Component {
       txData: {
         txParams: {
           data,
+          metainfo: {
+            actionName = '',
+            actionParams = [],
+          } = {},
         } = {},
       } = {},
       methodData = {},
@@ -266,71 +270,92 @@ export default class ConfirmTransactionBase extends Component {
       return null
     }
 
-    const laborxMethodView = {
-      postJob: PostJobTxView,
-    }
-
-    const LaborxMethodViewComponent = laborxMethodView[name]
-
-    return dataComponent || LaborxMethodViewComponent ? <LaborxMethodViewComponent methodData={methodData} /> : (
+    return (
       <div className="confirm-page-container-content__data">
-
-        <div className="confirm-page-container-content__data-box-label">
-          {t('youAreTryingTo')}
-          <span className="confirm-page-container-content__function-type">
-            { t(name) || t('notFound') }
-          </span>
-          &nbsp;
-          {t('withParams')}:
-        </div>
-        {
-          params && (
-            <div className="request-signature__rows" style={{ overflowY: 'auto' }}>
-              {
-                params.map(({ type, name, value }) => {
-                  if (type === 'bool') value = value.toString()
-                  return (
-                    <div className="request-signature__row" key={name}>
-                      <div className="request-signature__row-title">{t(name)}</div>
-                      <div className="request-signature__row-value">{value}</div>
-                    </div>
-                  )
-                })
-              }
-            </div>
-          )
-        }
-
-        <br/>
-        <br/>
-
-        <div className="confirm-page-container-content__data-box-label">
-          {`${t('functionType')}:`}
-          <span className="confirm-page-container-content__function-type">
-            { name || t('notFound') }
-          </span>
-        </div>
-        {
-          params && (
-            <div className="confirm-page-container-content__data-box">
-              <div className="confirm-page-container-content__data-field-label">
-                { `${t('parameters')}:` }
+       <div className="confirm-page-container-content__data-box-label">
+         { t('youAreTryingTo') }
+         <span className="confirm-page-container-content__function-type">{ actionName }</span>
+         &nbsp;
+         { t('withParams') }:
+       </div>
+        <div className="request-signature__rows" style={{ overflowY: 'auto' }}>
+          {
+            actionParams.map(({ title, value }) => (
+              <div className="request-signature__row" key={title}>
+                <div className="request-signature__row-title">{title}</div>
+                <div className="request-signature__row-value" dangerouslySetInnerHTML={{__html: value}} />
               </div>
-              <div>
-                <pre>{ JSON.stringify(params, null, 2) }</pre>
-              </div>
-            </div>
-          )
-        }
-
-        <div className="confirm-page-container-content__data-box-label">
-          {`${t('hexData')}: ${ethUtil.toBuffer(data).length} bytes`}
-        </div>
-        <div className="confirm-page-container-content__data-box">
-          { data }
+            ))
+          }
         </div>
       </div>
     )
+
+    // const laborxMethodView = {
+    //   postJob: PostJobTxView,
+    // }
+    //
+    // const LaborxMethodViewComponent = laborxMethodView[name]
+
+    // return dataComponent || LaborxMethodViewComponent ? <LaborxMethodViewComponent methodData={methodData} metainfo={metainfo} /> : (
+    //   <div className="confirm-page-container-content__data">
+    //
+    //     <div className="confirm-page-container-content__data-box-label">
+    //       {t('youAreTryingTo')}
+    //       <span className="confirm-page-container-content__function-type">
+    //         { t(name) || t('notFound') }
+    //       </span>
+    //       &nbsp;
+    //       {t('withParams')}:
+    //     </div>
+    //     {
+    //       params && (
+    //         <div className="request-signature__rows" style={{ overflowY: 'auto' }}>
+    //           {
+    //             params.map(({ type, name, value }) => {
+    //               if (type === 'bool') value = value.toString()
+    //               return (
+    //                 <div className="request-signature__row" key={name}>
+    //                   <div className="request-signature__row-title">{t(name)}</div>
+    //                   <div className="request-signature__row-value">{value}</div>
+    //                 </div>
+    //               )
+    //             })
+    //           }
+    //         </div>
+    //       )
+    //     }
+    //
+    //     <br/>
+    //     <br/>
+    //
+    //     <div className="confirm-page-container-content__data-box-label">
+    //       {`${t('functionType')}:`}
+    //       <span className="confirm-page-container-content__function-type">
+    //         { name || t('notFound') }
+    //       </span>
+    //     </div>
+    //     {
+    //       params && (
+    //         <div className="confirm-page-container-content__data-box">
+    //           <div className="confirm-page-container-content__data-field-label">
+    //             { `${t('parameters')}:` }
+    //           </div>
+    //           <div>
+    //             <pre>{ JSON.stringify(params, null, 2) }</pre>
+    //           </div>
+    //         </div>
+    //       )
+    //     }
+    //
+    //     <div className="confirm-page-container-content__data-box-label">
+    //       {`${t('hexData')}: ${ethUtil.toBuffer(data).length} bytes`}
+    //     </div>
+    //     <div className="confirm-page-container-content__data-box">
+    //       { data }
+    //     </div>
+    //   </div>
+    // )
   }
 
   handleEdit () {

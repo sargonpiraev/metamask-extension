@@ -38,7 +38,7 @@ JobWorkflow.contextTypes = {
   t: PropTypes.func,
 }
 
-const PostJobTxView = ({ methodData: { name, params, ipfs } }, { t }) => {
+const PostJobTxView = ({ methodData: { name, params, ipfs }, metainfo }, { t }) => {
   const paramsByNameMap = params.reduce((result, param) => ({ ...result, [param.name]: param }), {})
   return (
     <div className="confirm-page-container-content__data">
@@ -55,8 +55,9 @@ const PostJobTxView = ({ methodData: { name, params, ipfs } }, { t }) => {
         {/*&nbsp;*/}
         {t('withParams')}:
       </div>
-      <ParamListItem name='Job Title' value={ipfs.name} />
-      <JobWorkflow workflow={paramsByNameMap._workflow.value} />
+      {JSON.stringify(metainfo)}
+      {/*<ParamListItem name='Job Title' value={ipfs.name} />*/}
+      {/*<JobWorkflow workflow={paramsByNameMap._workflow.value} />*/}
       {/*{*/}
       {/*params && (*/}
       {/*<div className='request-signature__rows' style={{ overflowY: 'auto' }}>*/}
